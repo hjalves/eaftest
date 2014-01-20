@@ -1,0 +1,5 @@
+This is a dataset directory.
+problem.json	: arguments corresponding to problem formulation
+optimizers.json	: optimizers and parameters
+stats.json	: statistics about the rnp sets generated
+*.rnp.txt	: rnp sets generated from the optimizers execution

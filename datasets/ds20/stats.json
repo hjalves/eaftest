@@ -1,0 +1,26 @@
+{
+    "optimA": {
+        "pavg": 26.4375,
+        "pmax": 33,
+        "pmin": 19,
+        "runs": 32
+    },
+    "optimB": {
+        "pavg": 37.75,
+        "pmax": 43,
+        "pmin": 30,
+        "runs": 32
+    },
+    "optimC": {
+        "pavg": 16.21875,
+        "pmax": 23,
+        "pmin": 12,
+        "runs": 32
+    },
+    "optimD": {
+        "pavg": 29.5,
+        "pmax": 33,
+        "pmin": 22,
+        "runs": 32
+    }
+}

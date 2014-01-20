@@ -1,0 +1,38 @@
+{
+    "optimA": {
+        "cxpb": 0.7,
+        "lmbda": 100,
+        "mu": 50,
+        "mutpb": 0.2,
+        "ngen": 100,
+        "seed": 64,
+        "times": 32
+    },
+    "optimB": {
+        "cxpb": 0.7,
+        "lmbda": 100,
+        "mu": 50,
+        "mutpb": 0.1,
+        "ngen": 150,
+        "seed": 65,
+        "times": 32
+    },
+    "optimC": {
+        "cxpb": 0.7,
+        "lmbda": 100,
+        "mu": 50,
+        "mutpb": 0.2,
+        "ngen": 125,
+        "seed": 66,
+        "times": 32
+    },
+    "optimD": {
+        "cxpb": 0.7,
+        "lmbda": 100,
+        "mu": 50,
+        "mutpb": 0.2,
+        "ngen": 130,
+        "seed": 67,
+        "times": 32
+    }
+}
