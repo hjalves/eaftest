@@ -85,13 +85,11 @@ def print_attdata(nps, ind):
                                          "".join(map(str, i)), sum(i) )
 
 if __name__ == '__main__':
-    import libaft.caft as caft
-    caftlib = caft.Caft("libaft/libaft.so")
-    npsd = load_multiple_nps("oldtests/")
-    lt, ind = caftlib.eaf2d(npsd['optimA'], ind=True)
-    #lt, ind = attdata_filter(lt, ind)
+    import aft
+    npsd = load_multiple_nps("datasets/ds100")
+    lt, ind = aft.eaf2d(npsd['optimA'], ind=True)
     print nps_stats(lt)
+    #lt, ind = attdata_filter(lt, ind)
     #print_attdata(lt, ind)
-    ##ind = load_ind("oldtests/indicator-46.ind.txt", flat=True)
     
     
