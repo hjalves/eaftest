@@ -23,3 +23,24 @@ stat2 = aft.ksstat(point_ind, 2)
 
 print "C 1st order test statistic", stat1
 print "C 2nd order test statistic", stat2
+
+#----------
+from eaf_test_kscoarse import runkernel
+from time import time
+import numpy as np
+
+nvars = len(point_ind[0])
+permutations = 10240
+gen = runkernel(point_ind, permutations)
+# Max distance array
+maxdist = np.zeros(permutations, dtype=np.int32)
+real = time()
+for i, maxd in enumerate(gen):
+    maxdist[i] = maxd
+    if (i+1) % 512 == 0:
+        print "%6d perms, %7.3f sec" % (i+1, time() - real)
+    if (i+1) % 1024 == 0:
+        print "tail:", np.bincount(maxdist[:i+1], minlength=nvars//2+1)
+
+print "total elapsed", time() - real
+
