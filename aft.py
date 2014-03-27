@@ -2,8 +2,14 @@
 # -*- coding: utf-8 -*-
 # libaft python foreign function interface
 
+import os
 import ctypes
 from ctypes import c_int, c_double, c_byte, POINTER
+
+# ugly workaround
+if not os.path.isfile("./libaft/libaft.so"):
+    os.system("make -C ./libaft")
+_lib = ctypes.cdll.LoadLibrary("./libaft/libaft.so")
 
 # Output data type
 class LEVELDATA(ctypes.Structure):
@@ -17,8 +23,6 @@ def _accum(l):
     for x in l:
         acc += x
         yield acc
-
-_lib = ctypes.cdll.LoadLibrary("./libaft/libaft.so")
 
 def eaf2d(npsets, ind=True):
     # TODO: verificar correcao do dados inputs (ex: dimensionalidade)

@@ -1,6 +1,6 @@
 CC = gcc
 OPT = -march=native -O3 -funroll-loops
-CFLAGS = -Wall -g $(OPT)
+CFLAGS = -Wall $(OPT)
 
 all: libaft
 
