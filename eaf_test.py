@@ -11,14 +11,17 @@ from eaf_test_kscoarse import runkernel
 
 
 def main(args):
-    print
-    print "Second-order EAF KS-like two-sample two-sided test"
-    print "=================================================="
-    print 
+    print "\nSecond-order EAF KS-like two-sample two-sided test"
+    print "==================================================\n"
     
     if len(args) < 3:
         print "Usage: %s <fileA> <fileB>" % args[0]
         print "       %s -i <indicators_file>" % args[0]
+        print 
+        print "<fileA> and <fileB>: non-dominated sets of two-dimensional"
+        print "                     objective vectors"
+        print "<indicators_file>: point indicator file from the joint-eaf"
+        print "                   computation"
         print
         return
     
@@ -105,11 +108,11 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     
     # ------ Accept/reject null hypothesis ------
     
-    # NB: -1 resulta de diferentes convenções para a definição de valor crítico
+    # NB: -1 resulta das diferentes convenções para a definição de valor crítico
     crit = criticalvalue(tail, alpha * permutations) - 1
     pval = pvalue(tail, stat2) / float(permutations)
     
-    print "- Null hypothesis final decision:"  
+    print "- Null hypothesis decision:"  
     print "  * Critical value = %d/%d" % (crit, nruns)
     print "                   = %f" % (crit / float(nruns))
     print "  * p-value = %f" % pval
