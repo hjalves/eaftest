@@ -9,6 +9,7 @@ import datasets
 import aft
 from eaf_test_kscoarse import runkernel
 
+
 def main(args):
     print
     print "Second-order EAF KS-like two-sample two-sided test"
@@ -17,12 +18,16 @@ def main(args):
     
     if len(args) < 3:
         print "Usage: %s <fileA> <fileB>" % args[0]
+        print "       %s -i <indicators_file>" % args[0]
         print
         return
     
-    ind = main_load_nps(args[1], args[2])
-    main_eaftest(ind)
+    if args[1] == '-i':
+        ind = main_load_ind(args[2])
+    else:
+        ind = main_load_nps(args[1], args[2])
     
+    main_eaftest(ind)
 
 
 def main_load_nps(fileA, fileB):
@@ -42,6 +47,15 @@ def main_load_nps(fileA, fileB):
     point_ind = eafindicators(npsetA, npsetB)
     return point_ind
 
+
+def main_load_ind(indfile):
+    """Load point indicator file"""
+    print "- Loading the following file with attainment indicator values:"
+    print "  *", indfile
+    print
+    
+    point_ind = datasets.load_ind(indfile, flat=True)
+    return point_ind
 
 def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     """
@@ -75,10 +89,9 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
 
     print "- Using %d random permutations to estimate null distribution." % permutations
     print "  Please be patient..."
-    gen = runkernel(point_ind, permutations)
     maxdist = np.zeros(permutations, dtype=np.int32)    # Max distance array
     rtime = time.time()
-    for i, maxd in enumerate(gen):
+    for i, maxd in enumerate(runkernel(point_ind, permutations)):
         maxdist[i] = maxd
         if (i+1) % (permutations//8) == 0:
             print "    %6d permutations, %7.3f sec" % (i+1, time.time()-rtime)
@@ -101,11 +114,10 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     print "                   = %f" % (crit / float(nruns))
     print "  * p-value = %f" % pval
     if pval <= alpha:
-        csym = '=' if pval == alpha else '<'
-        print "            %s alpha (%s)" % (csym, alpha)
+        print "            <= alpha (%s)\n" % alpha
         print "  * Decision: REJECT the null hypothesis"
     else:
-        print "            > alpha (%s)" % alpha
+        print "            > alpha (%s)\n" % alpha
         print "  * Decision: do NOT REJECT the null hypothesis"
     print
 
@@ -138,5 +150,4 @@ def eafindicators(npsA, npsB):
 
 
 if __name__ == '__main__':
-
     main(sys.argv)
