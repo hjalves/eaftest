@@ -49,7 +49,7 @@ def runkernel(indicators, permutations):
     kargs.update(tblock=tblock, pblock=pblock)
     
     # Load and build kernel
-    print " ; ".join("%s: %s" % (k, v) for k, v in kargs.items())
+    print "DEBUG:", " ; ".join("%s: %s" % (k, v) for k, v in kargs.items())
     kstr, kopt = loadkernel("square-3-xor-parted", **kargs)
     prg = cl.Program(ctx, kstr).build(options=kopt)
     
