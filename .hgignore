@@ -5,3 +5,5 @@ syntax: glob
 *.so
 *.pyc
 eaftest.egg-info
+build/
+dist/
