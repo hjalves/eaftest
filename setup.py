@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 
 from setuptools import setup, Extension
-import os
+import os, sys
 
 #libaft = Extension('libaft',
 #                    sources = ['libaft/eaf2d.c', 'libaft/eaftest.c'])
 
 # Compile libaft
-os.system("make -C ./eaftest/libaft distclean libaft")
+try:
+    assert os.system("make -C ./eaftest/libaft") == 0
+except:
+    print("Error building C library. Exiting...")
+    sys.exit(1)
 
 setup(
     name='eaftest',
-    version='0.1.dev1',
+    version='0.1.dev2',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
     url='https://bitbucket.org/hjalves/eaftest',

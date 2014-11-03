@@ -1,1 +1,4 @@
-# Empty
+include eaftest/clkernels/*.cl
+include eaftest/libaft/*.c
+include eaftest/libaft/*.h
+include eaftest/libaft/Makefile
