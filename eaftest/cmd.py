@@ -2,15 +2,19 @@
 # -*- coding: utf-8 -*-
 # 
 
+from __future__ import division, absolute_import, \
+                       unicode_literals
+from .utils.py3k import *
+
 import sys, os
 import time
 import numpy as np
-import datasets
-import aft
-from eaf_test_kscoarse import runkernel
+from . import datasets
+from . import aft
+from .eaf_test_kscoarse import runkernel
 
 
-def main(args):
+def main(args=sys.argv):
     print "\nSecond-order EAF KS-like two-sample two-sided test"
     print "==================================================\n"
     

@@ -81,7 +81,7 @@ def print_attdata(nps, ind):
     for num, (pset, iset) in enumerate(zip(nps, ind), 1):
         print "="*26, "att %02d/%02d" % (num, len(nps)), "="*26
         for p, i in zip(pset, iset):
-                print "%s : %s : %d" % ( ",".join("%8.2f" % c for c in p),
+            print "%s : %s : %d" % ( ",".join("%8.2f" % c for c in p),
                                          "".join(map(str, i)), sum(i) )
 
 if __name__ == '__main__':

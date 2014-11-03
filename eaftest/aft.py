@@ -5,11 +5,11 @@
 import os
 import ctypes
 from ctypes import c_int, c_double, c_byte, POINTER
+import ctypes.util
 
-# ugly workaround
-if not os.path.isfile("./libaft/libaft.so"):
-    os.system("make -C ./libaft")
-_lib = ctypes.cdll.LoadLibrary("./libaft/libaft.so")
+LIB_PATH = os.path.join(os.path.dirname(__file__),
+                        "libaft", "libaft.so")
+_lib = ctypes.cdll.LoadLibrary(LIB_PATH)
 
 # Output data type
 class LEVELDATA(ctypes.Structure):

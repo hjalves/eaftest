@@ -5,9 +5,9 @@ import os, sys
 import numpy as np
 import pyopencl as cl
 from time import time, clock
-from clkernels import loadkernel
-from bintools import make_bindata32
-from datasets import load_ind
+from .clkernels import loadkernel
+from .bintools import make_bindata32
+from .datasets import load_ind
 
 # Compilation errors & warnings output
 os.environ['PYOPENCL_COMPILER_OUTPUT'] = '1'
