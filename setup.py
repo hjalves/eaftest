@@ -3,19 +3,18 @@
 from setuptools import setup, Extension
 import os, sys
 
-#libaft = Extension('libaft',
-#                    sources = ['libaft/eaf2d.c', 'libaft/eaftest.c'])
 
-# Compile libaft
+# Compile C libraries
 try:
-    assert os.system("make -C ./eaftest/libaft") == 0
+    assert 0 == os.system("make -C ./eaftest/libaft")
+    assert 0 == os.system("make -C ./eaftest/libeafbb lib")
 except:
-    print("Error building C library. Exiting...")
+    print("Error building C libraries. Exiting...")
     sys.exit(1)
 
 setup(
     name='eaftest',
-    version='0.1.dev2',
+    version='0.1.dev3',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
     url='https://bitbucket.org/hjalves/eaftest',
@@ -23,10 +22,11 @@ setup(
     author_email='halves@uc.pt',
     license='GPL',
     classifiers=[
-        'Development Status :: 1 - Planning',
-        #'Development Status :: 3 - Alpha',
+        'Development Status :: 2 - Pre-Alpha',
+        'Environment :: Console',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'Operating System :: POSIX :: Linux'
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
@@ -37,10 +37,12 @@ setup(
         'eaftest',
         'eaftest.utils',
         'eaftest.libaft',
+        'eaftest.libeafbb',
         'eaftest.clkernels',
     ],
     package_data={
         'eaftest.libaft': ['libaft.so'],
+        'eaftest.libeafbb': ['libeafbb.so'],
         'eaftest.clkernels': ['*.cl'],
     },
     install_requires=[
@@ -53,8 +55,8 @@ setup(
         ],
     },
     #ext_modules=[libaft],
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    #test_suite='nose.collector',
+    #tests_require=['nose'],
     include_package_data=True,
     zip_safe=False,
 )

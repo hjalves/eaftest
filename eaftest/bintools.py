@@ -1,4 +1,4 @@
-#!/usr/bin/env python   
+# FIXME: Python 2 only!
 # -*- coding: utf-8 -*-
 # Binary tools using numpy for the eaf statistic tests
 

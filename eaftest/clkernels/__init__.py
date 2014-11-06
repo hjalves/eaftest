@@ -1,4 +1,4 @@
-#!/usr/bin/env python   
+# FIXME: Python 2 only!
 # -*- coding: utf-8 -*-
 
 import importlib    # for dynamic kernels

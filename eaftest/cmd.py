@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+# FIXME: Python 2 only!
 # -*- coding: utf-8 -*-
 # 
 
@@ -10,7 +10,7 @@ import sys, os
 import time
 import numpy as np
 from . import datasets
-from . import aft
+from . import libaft
 from .eaf_test_kscoarse import runkernel
 
 
@@ -134,7 +134,7 @@ def criticalvalue(tail, alpha):
     cumtail = np.cumsum(tail[::-1])
     # Valor crítico. Atenção! Não é a mesma convenção do aft-test...
     # este valor crítico ainda pertence à região crítica!
-    critvalue = (i for i, p in enumerate(cumtail[::-1]) if p < alpha).next()
+    critvalue = next(i for i, p in enumerate(cumtail[::-1]) if p < alpha)
     return critvalue
 
 
