@@ -12,7 +12,7 @@ import numpy as np
 from . import datasets
 from . import libaft
 from . import bintools
-from . import eaf_test_kscoarse as clkernel
+#from . import eaf_test_kscoarse as clkernel
 from . import libeafbb as cpukernel
 
 KERNEL = cpukernel

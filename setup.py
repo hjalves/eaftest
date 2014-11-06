@@ -47,7 +47,7 @@ setup(
     },
     install_requires=[
         'numpy',
-        'pyopencl',
+        #'pyopencl',
     ],
     entry_points={
         'console_scripts': [
