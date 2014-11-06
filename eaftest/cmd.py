@@ -110,7 +110,7 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     masks = bintools.make_masks(permutations, nvars, seed=64)
     for i, maxd in enumerate(KERNEL.runkernel(point_ind, masks)):
         maxdist[i] = maxd
-        if (i+1) % (permutations//16) == 0:
+        if (i+1) % (permutations//20) == 0:
             print "    %6d permutations, %7.3f sec" % (i+1, time.time()-rtime)
     print "  * Time elapsed: %7.3f" % (time.time()-rtime)
     

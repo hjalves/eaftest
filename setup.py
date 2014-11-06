@@ -14,12 +14,12 @@ except:
 
 setup(
     name='eaftest',
-    version='0.1.dev5',
+    version='0.1.dev6',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
     url='https://bitbucket.org/hjalves/eaftest',
     author='Humberto Alves',
-    author_email='halves@uc.pt',
+    author_email='hjalves@student.dei.uc.pt',
     license='GPL',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
