@@ -17,7 +17,7 @@ setup(
     version='0.1.dev6',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
-    url='https://bitbucket.org/hjalves/eaftest',
+    url='https://github.com/hjalves/eaftest',
     author='Humberto Alves',
     author_email='hjalves@student.dei.uc.pt',
     license='GPL',
