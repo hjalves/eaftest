@@ -14,7 +14,7 @@ except:
 
 setup(
     name='eaftest',
-    version='0.1.dev4',
+    version='0.1.dev5',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
     url='https://bitbucket.org/hjalves/eaftest',

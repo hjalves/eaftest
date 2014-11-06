@@ -15,6 +15,9 @@ from . import bintools
 from . import eaf_test_kscoarse as clkernel
 from . import libeafbb as cpukernel
 
+KERNEL = cpukernel
+
+
 def main(args=None):
     if args == None:
         args = list(sys.argv)
@@ -105,7 +108,7 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     rtime = time.time()
     
     masks = bintools.make_masks(permutations, nvars, seed=64)
-    for i, maxd in enumerate(cpukernel.runkernel(point_ind, masks)):
+    for i, maxd in enumerate(KERNEL.runkernel(point_ind, masks)):
         maxdist[i] = maxd
         if (i+1) % (permutations//16) == 0:
             print "    %6d permutations, %7.3f sec" % (i+1, time.time()-rtime)
