@@ -11,16 +11,21 @@ import time
 import numpy as np
 from . import datasets
 from . import libaft
-from .eaf_test_kscoarse import runkernel
+from . import bintools
+from . import eaf_test_kscoarse as clkernel
+from . import libeafbb as cpukernel
 
+def main(args=None):
+    if args == None:
+        args = list(sys.argv)
 
-def main(args=sys.argv):
     print "\nSecond-order EAF KS-like two-sample two-sided test"
     print "==================================================\n"
     
     if len(args) < 3:
-        print "Usage: %s <fileA> <fileB>" % args[0]
-        print "       %s -i <indicators_file>" % args[0]
+        execname = os.path.basename(args[0])
+        print "Usage: %s <fileA> <fileB>" % execname
+        print "       %s -i <indicators_file>" % execname
         print 
         print "<fileA> and <fileB>: non-dominated sets of two-dimensional"
         print "                     objective vectors"
@@ -88,7 +93,7 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     # ------ Test Statistic ------
 
     print "- Computing the test statistic..."    
-    stat2 = aft.ksstat(point_ind, order=2)
+    stat2 = libaft.ksstat(point_ind, order=2)
     print "  * Test statistic = %d/%d" % (stat2, nruns)
     print "                   = %f" % (stat2 / float(nruns)), '\n'
     
@@ -98,9 +103,11 @@ def main_eaftest(point_ind, permutations=10240, alpha=0.05):
     print "  Please be patient..."
     maxdist = np.zeros(permutations, dtype=np.int32)    # Max distance array
     rtime = time.time()
-    for i, maxd in enumerate(runkernel(point_ind, permutations)):
+    
+    masks = bintools.make_masks(permutations, nvars, seed=64)
+    for i, maxd in enumerate(cpukernel.runkernel(point_ind, masks)):
         maxdist[i] = maxd
-        if (i+1) % (permutations//8) == 0:
+        if (i+1) % (permutations//16) == 0:
             print "    %6d permutations, %7.3f sec" % (i+1, time.time()-rtime)
     print "  * Time elapsed: %7.3f" % (time.time()-rtime)
     
@@ -149,7 +156,7 @@ def pvalue(tail, stat):
 def eafindicators(npsA, npsB):
     """From the output of two optimizers (NP sets), get eaf indicators"""
     # calcular os indicadores com o eaf conjunto
-    lt, ind = aft.eaf2d(npsA + npsB, ind=True)
+    lt, ind = libaft.eaf2d(npsA + npsB, ind=True)
     # espalmar lista, ou seja,
     # (m listas) * (n pontos) * (b bits) -> lista de (m * n pontos) * (b bits)
     flat_ind = [point for level in ind for point in level]

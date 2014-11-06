@@ -6,7 +6,7 @@ import numpy as np
 import pyopencl as cl
 from time import time, clock
 from .clkernels import loadkernel
-from .bintools import make_bindata32
+from .bintools import pack_arrays_uint32
 from .datasets import load_ind
 
 # Compilation errors & warnings output
@@ -20,13 +20,13 @@ def data_attributes(bdata, bmask):
     bytespu = bdata.dtype.itemsize
     return npoints, permutations, unitspp, bytespu
 
-def runkernel(indicators, permutations):
+def runkernel(indicators, masks):
     # Create context and command queue
     ctx = cl.create_some_context()
     queue = cl.CommandQueue(ctx)
     
     # Make indicator & permutation masks binary data
-    data, mask, nvars = make_bindata32(indicators, permutations)
+    data, mask, nvars = pack_arrays_uint32(indicators, masks)
     # Data attributes: number of points, permutations, units per point, bytes per unit
     npoints, perms, unitspp, bytespu = data_attributes(data, mask)
     
@@ -68,24 +68,4 @@ def runkernel(indicators, permutations):
             yield d
 
 
-if __name__ == '__main__':
-    # Load indicators
-    indicators = load_ind("indicators/local2-25-b.AB.u", flat=True)
-    permutations = 10240
-    # Number of executions
-    nvars = len(indicators[0])
-    
-    # Run kernel
-    gen = runkernel(indicators, permutations)
-    # Max distance array
-    maxdist = np.zeros(permutations, dtype=np.int32)
-    real = time()
-    for i, maxd in enumerate(gen):
-        maxdist[i] = maxd
-        if (i+1) % 512 == 0:
-            print "%6d perms, %7.3f sec" % (i+1, time() - real)
-        if (i+1) % 1024 == 0:
-            print "tail:", np.bincount(maxdist[:i+1], minlength=nvars//2+1)
-    
-    
-    print "total elapsed", time() - real
+

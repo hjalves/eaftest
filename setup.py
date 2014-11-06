@@ -14,7 +14,7 @@ except:
 
 setup(
     name='eaftest',
-    version='0.1.dev3',
+    version='0.1.dev4',
     description=('Tools to perform hypothesis tests based on '
                  'the empirical attainment function.'),
     url='https://bitbucket.org/hjalves/eaftest',
@@ -26,10 +26,10 @@ setup(
         'Environment :: Console',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
-        'Operating System :: POSIX :: Linux'
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        #'Programming Language :: Python :: 3.3',
+        #'Programming Language :: Python :: 3.4',
         'Topic :: Scientific/Engineering',
     ],
     keywords='eaf statistics opencl',

@@ -57,4 +57,13 @@ def make_bindata32(point_ind, permutations=10240):
     bdata32 = binarrays_to_uint32(point_ind)
     return bdata32, bmask32, nvars
 
+def pack_arrays_uint32(point_ind, masks):
+    nvars, npoints = len(point_ind[0]), len(point_ind)
+    bdata32 = binarrays_to_uint32(point_ind)
+    bmask32 = binarrays_to_uint32(rmasks)
+    return bdata32, bmask32, nvars
+
+def make_masks(n_permutations, nvars, seed=64):
+    rmasks = randmask(n_permutations, nvars, nvars//2, seed)
+    return rmasks
 

@@ -12,3 +12,4 @@ __author__ = 'Humberto Alves'
 __email__ = 'hjalves@student.dei.uc.pt'
 __license__ = 'GPL'
 __copyright__ = 'Copyright 2014 Humberto Alves'
+

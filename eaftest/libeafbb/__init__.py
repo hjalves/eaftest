@@ -26,12 +26,8 @@ def init(points, masks):
     nvars, npoints, nmasks = len(points[0]), len(points), len(masks)
     return _lib.init_from_arrays(points, masks, nvars, nmasks, npoints)
 
-def enable_debug():
-    _lib.set_debug_level(2)
-
-def disable_debug():
-    _lib.set_debug_level(0)
-
+def set_debug(level=2):
+    _lib.set_debug_level(level)
 
 def runkernel(points, masks):
     nmasks = len(masks)
@@ -40,10 +36,10 @@ def runkernel(points, masks):
     points = np.array(points, dtype=np.int32)
     masks  = np.array(masks, dtype=np.int32)
 
-    enable_debug()
+    set_debug()
     init(points, masks)
 
-    disable_debug()
+    set_debug(0)
     for i in range(nmasks):
         yield test_mask(i)
 

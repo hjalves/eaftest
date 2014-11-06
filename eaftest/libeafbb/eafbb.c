@@ -24,7 +24,7 @@ void init() {
     darray = binarrays_to_uint(data->points, data->npoints, data->nvars);
     marray = binarrays_to_uint(data->masks, data->nmasks, data->nvars);
     if (DEBUG_LEVEL >= 1) {
-        puts("# Init CPU Test");
+        puts("# DEBUG: Init CPU Test");
         printf("- Data loaded: Nvars: %d, Nmasks: %d, Npoints: %d\n",
             data->nvars, data->nmasks, data->npoints);
         printf("- Memory: %d Bytes, %d KiBytes\n", tree_memory,
