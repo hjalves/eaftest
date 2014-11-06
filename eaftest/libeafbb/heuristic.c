@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "dataload.h"
 #include <assert.h>
+#include "dataload.h"
+#include "heuristic.h"
 
 #define popcount __builtin_popcount
 
